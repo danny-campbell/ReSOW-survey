@@ -10,14 +10,17 @@
 doughnut <- function(prop.1, prop.2, col.1, col.2){
   require(circlize)
   par(mar = c(0, 0, 0, 0), bg = rgb(1, 1, 1, 0))
-  plot(c(-0.93, 0.93), c(-0.93, 0.93), type = "n", axes = FALSE, ann = FALSE, 
+  plot(c(-0.96, 0.96), c(-0.96, 0.96), type = "n", axes = FALSE, ann = FALSE, 
        asp = 1)
+  draw.sector(0, 360, rou1 = 1, rou2 = , clock.wise = TRUE, 
+              col = rgb(1, 1, 1, 0.85), lwd = 5, border = rgb(1, 1, 1, 0.85))
   draw.sector(0, 360, rou1 = 1, rou2 = 0.55, clock.wise = TRUE, col = grey(0.9),
-              lwd = 5, border = 0)
+              lwd = 5, border = "white")
   draw.sector(90, 90 - (prop.1 * 3.6), rou1 = 1, rou2 = 0.55, clock.wise = TRUE,
-              col = col.1, lwd = 5, border = 0)
+              col = col.1, lwd = 5, border = "white")
   draw.sector(90 - (prop.1 * 3.6), 90 - ((prop.1 + prop.2) * 3.6), rou1 = 1, 
-              rou2 = 0.55, clock.wise = TRUE, col = col.2, lwd = 5, border = 0)
+              rou2 = 0.55, clock.wise = TRUE, col = col.2, lwd = 5, 
+              border = "white")
   text(0, 0.15, paste0(prop.1 + prop.2, "%"), cex = 3, col = grey(0.55), 
        font = 2)
   text(0, -0.225, paste0("+", prop.2, "%"), cex = 2, col = grey(0.7), font = 2)
@@ -43,8 +46,8 @@ doughnut.png <- function(prop.1, prop.2, col.1, col.2){
 
 
 # colours for status-quo and management levels
-col.1 <- rgb(0.9, 0, 0)
-col.2 <- rgb(0, 0.9, 0)
+col.1 <- "#DB4325" 
+col.2 <- "#006164"
 
 # set the range for status-quo and the maximum after management
 min.sq <- 0 # as a %
