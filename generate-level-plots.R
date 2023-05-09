@@ -9,7 +9,7 @@
 # col.2: colour to represent management proportion
 doughnut <- function(prop.1, prop.2, col.1, col.2){
   require(circlize)
-  par(mar = c(0, 0, 0, 0))
+  par(mar = c(0, 0, 0, 0), bg = rgb(1, 1, 1, 0))
   plot(c(-0.93, 0.93), c(-0.93, 0.93), type = "n", axes = FALSE, ann = FALSE, 
        asp = 1)
   draw.sector(0, 360, rou1 = 1, rou2 = 0.55, clock.wise = TRUE, col = grey(0.9),
