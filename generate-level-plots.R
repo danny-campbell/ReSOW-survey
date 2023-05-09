@@ -26,7 +26,8 @@ doughnut <- function(prop.1, prop.2, col.1, col.2){
 # function to save the plot to a svg file 
 # note: stored in folder 'img' and takes the nae from the levels
 doughnut.svg <- function(prop.1, prop.2, col.1, col.2){
-  svg(paste0("img/level-", prop.1, "-", prop.2, ".svg"), width = 2, height = 2)
+  svg(paste0("img/level-", prop.1, "-", prop.2, ".svg"), width = 2, height = 2,
+      bg = "transparent")
   doughnut(prop.1, prop.2, col.1, col.2)
   dev.off()   
 }
@@ -34,7 +35,8 @@ doughnut.svg <- function(prop.1, prop.2, col.1, col.2){
 # function to save the plot to a png file 
 # note: stored in folder 'img' and takes the nae from the levels
 doughnut.png <- function(prop.1, prop.2, col.1, col.2){
-  svg(paste0("img/level-", prop.1, "-", prop.2, ".png"), width = 2, height = 2)
+  svg(paste0("img/level-", prop.1, "-", prop.2, ".png"), width = 2, height = 2,
+      bg = "transparent")
   doughnut(prop.1, prop.2, col.1, col.2)
   dev.off()   
 }
