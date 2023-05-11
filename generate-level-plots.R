@@ -89,8 +89,8 @@ doughnut.sq.png <- function(prop.1, col.1){
 
 
 # colours for status-quo and management levels
-col.1 <- "#f23427" 
-col.2 <- "#f23427"
+col.1 <- "#d73027"
+col.2 <- "#1a9850"
 
 # set the range for status-quo and the maximum after management
 min.sq <- 0 # as a %
