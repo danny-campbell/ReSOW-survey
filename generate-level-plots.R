@@ -7,10 +7,28 @@
 # prop.2: increase proportion due to management option (as a %)
 # col.1: colour to represent status-quo proportion
 # col.2: colour to represent management proportion
+# doughnut <- function(prop.1, prop.2, col.1, col.2){
+#   require(circlize)
+#   par(mar = c(0, 0, 0, 0), bg = rgb(1, 1, 1, 0))
+#   plot(c(-0.96, 0.96), c(-0.96, 0.96), type = "n", axes = FALSE, ann = FALSE, 
+#        asp = 1)
+#   draw.sector(0, 360, rou1 = 1, rou2 = , clock.wise = TRUE, 
+#               col = rgb(1, 1, 1, 0.85), lwd = 5, border = rgb(1, 1, 1, 0.85))
+#   draw.sector(0, 360, rou1 = 1, rou2 = 0.55, clock.wise = TRUE, col = grey(0.9),
+#               lwd = 5, border = "white")
+#   draw.sector(90, 90 - (prop.1 * 3.6), rou1 = 1, rou2 = 0.55, clock.wise = TRUE,
+#               col = col.1, lwd = 5, border = "white")
+#   draw.sector(90 - (prop.1 * 3.6), 90 - ((prop.1 + prop.2) * 3.6), rou1 = 1, 
+#               rou2 = 0.55, clock.wise = TRUE, col = col.2, lwd = 5, 
+#               border = "white")
+#   text(0, 0.15, paste0(prop.1 + prop.2, "%"), cex = 3, col = grey(0.55), 
+#        font = 2)
+#   text(0, -0.225, paste0("+", prop.2, "%"), cex = 2, col = grey(0.7), font = 2)
+# }
 doughnut <- function(prop.1, prop.2, col.1, col.2){
   require(circlize)
   par(mar = c(0, 0, 0, 0), bg = rgb(1, 1, 1, 0))
-  plot(c(-0.96, 0.96), c(-0.96, 0.96), type = "n", axes = FALSE, ann = FALSE, 
+  plot(c(-1.65, 1.65), c(-1.35, 1.35), type = "n", axes = FALSE, ann = FALSE, 
        asp = 1)
   draw.sector(0, 360, rou1 = 1, rou2 = , clock.wise = TRUE, 
               col = rgb(1, 1, 1, 0.85), lwd = 5, border = rgb(1, 1, 1, 0.85))
@@ -21,28 +39,59 @@ doughnut <- function(prop.1, prop.2, col.1, col.2){
   draw.sector(90 - (prop.1 * 3.6), 90 - ((prop.1 + prop.2) * 3.6), rou1 = 1, 
               rou2 = 0.55, clock.wise = TRUE, col = col.2, lwd = 5, 
               border = "white")
-  text(0, 0.15, paste0(prop.1 + prop.2, "%"), cex = 3, col = grey(0.55), 
-       font = 2)
-  text(0, -0.225, paste0("+", prop.2, "%"), cex = 2, col = grey(0.7), font = 2)
+  
+  A <- abs(90 - abs(180 - (360 * (prop.1 / 100))))
+  prop.1.y <- 1.4 * sin(A * (pi/180))
+  prop.1.x <- sqrt((1.4^2 - prop.1.y^2))
+  if(prop.1 > 50) prop.1.x <- prop.1.x * -1
+  if((prop.1 > 25) & (prop.1 < 75)) prop.1.y <- prop.1.y * -1
+  text(prop.1.x, prop.1.y, paste0(prop.1, "%"), cex = 1.375, col = col.1, font = 2)
+  
+  B <- abs(90 - abs(180 - (360 * ((prop.1 + prop.2) / 100))))
+  prop.2.y <- 1.4 * sin(B * (pi/180))
+  prop.2.x <- sqrt((1.4^2 - prop.2.y^2))
+  if(prop.1 + prop.2 > 50) prop.2.x <- prop.2.x * -1
+  if((prop.1 + prop.2 > 25) & (prop.1 + prop.2 < 75)) prop.2.y <- prop.2.y * -1
+  text(prop.2.x, prop.2.y, paste0(prop.1 + prop.2, "%"), cex = 1.375, col = col.2, font = 2)
+  text(0, 0, paste0("+", prop.2, "%"), cex = 1.375, col = grey(0.7), font = 2)
 }
 
 # function to generate the status-quo doughnut plot
 # agruments:
 # prop.1: status-quo proportion (as a %)
 # col.1: colour to represent status-quo proportion
+# doughnut.sq <- function(prop.1, col.1){
+#   require(circlize)
+#   par(mar = c(0, 0, 0, 0), bg = rgb(1, 1, 1, 0))
+#   plot(c(-0.96, 0.96), c(-0.96, 0.96), type = "n", axes = FALSE, ann = FALSE, 
+#        asp = 1)
+#   draw.sector(0, 360, rou1 = 1, rou2 = , clock.wise = TRUE, 
+#               col = rgb(1, 1, 1, 0.85), lwd = 5, border = rgb(1, 1, 1, 0.85))
+#   draw.sector(0, 360, rou1 = 1, rou2 = 0.55, clock.wise = TRUE, col = grey(0.9),
+#               lwd = 5, border = "white")
+#   draw.sector(90, 90 - (prop.1 * 3.6), rou1 = 1, rou2 = 0.55, clock.wise = TRUE,
+#               col = col.1, lwd = 5, border = "white")
+#   text(0, 0.15, paste0(prop.1, "%"), cex = 3, col = grey(0.55), 
+#        font = 2)
+# }
 doughnut.sq <- function(prop.1, col.1){
   require(circlize)
   par(mar = c(0, 0, 0, 0), bg = rgb(1, 1, 1, 0))
-  plot(c(-0.96, 0.96), c(-0.96, 0.96), type = "n", axes = FALSE, ann = FALSE, 
+  plot(c(-1.65, 1.65), c(-1.35, 1.35), type = "n", axes = FALSE, ann = FALSE, 
        asp = 1)
-  draw.sector(0, 360, rou1 = 1, rou2 = , clock.wise = TRUE, 
+  draw.sector(0, 360, rou1 = 1, rou2 = , clock.wise = TRUE,
               col = rgb(1, 1, 1, 0.85), lwd = 5, border = rgb(1, 1, 1, 0.85))
   draw.sector(0, 360, rou1 = 1, rou2 = 0.55, clock.wise = TRUE, col = grey(0.9),
               lwd = 5, border = "white")
   draw.sector(90, 90 - (prop.1 * 3.6), rou1 = 1, rou2 = 0.55, clock.wise = TRUE,
               col = col.1, lwd = 5, border = "white")
-  text(0, 0.15, paste0(prop.1, "%"), cex = 3, col = grey(0.55), 
-       font = 2)
+  
+  A <- abs(90 - abs(180 - (360 * (prop.1 / 100))))
+  prop.1.y <- 1.4 * sin(A * (pi/180))
+  prop.1.x <- sqrt((1.4^2 - prop.1.y^2))
+  if(prop.1 > 50) prop.1.x <- prop.1.x * -1
+  if((prop.1 > 25) & (prop.1 < 75)) prop.1.y <- prop.1.y * -1
+  text(prop.1.x, prop.1.y, paste0(prop.1, "%"), cex = 1.375, col = col.1, font = 2)
 }
 
 
@@ -54,7 +103,8 @@ doughnut.svg <- function(prop.1, prop.2, col.1, col.2){
   svg(paste0("img/level-", str_pad(prop.1, 3, pad = "0"), "-",
              str_pad(prop.2, 3, pad = "0"), ".svg"), 
       width = 2, height = 2, bg = "transparent")
-  doughnut(prop.1, prop.2, col.1, col.2)
+  if(prop.2 == 0) doughnut.sq(prop.1, col.1)
+  if(prop.2 != 0) doughnut(prop.1, prop.2, col.1, col.2)
   dev.off()   
 }
 
@@ -64,7 +114,8 @@ doughnut.png <- function(prop.1, prop.2, col.1, col.2){
   svg(paste0("img/level-", str_pad(prop.1, 3, pad = "0"), "-",
              str_pad(prop.2, 3, pad = "0"), ".png"), 
       width = 2, height = 2, bg = "transparent")
-  doughnut(prop.1, prop.2, col.1, col.2)
+  if(prop.2 == 0) doughnut.sq(prop.1, col.1)
+  if(prop.2 != 0) doughnut(prop.1, prop.2, col.1, col.2)
   dev.off()   
 }
 
@@ -124,8 +175,11 @@ for(i in 1:nrow(proportion_combns)){
 }
 
 # plot and save the status-quo doughnut plots 
-for(i in seq_along(sq.levs)){
-  doughnut.sq.svg(sq.levs[i], col.1)
-  # doughnut.sq.png(sq.levs[i], col.1)
-}
+# for(i in seq_along(sq.levs)){
+#   doughnut.sq.svg(sq.levs[i], col.1)
+#   # doughnut.sq.png(sq.levs[i], col.1)
+# }
+
+
+
 
